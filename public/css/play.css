@@ -1,0 +1,224 @@
+@import "var.css";
+* {
+    margin: 0;
+    box-sizing: border-box;
+    font-family: monospace;
+}
+body {
+    background-color: var(--background);
+}
+
+#title {
+    text-align: center;
+    color: var(--mainColor);
+    font-size: 30px;
+}
+#game-user {
+    background-color: var(--secondBackground);
+    height: 30px;
+    min-width: 100px;
+    max-width: 300px;
+    border-radius: 8px;
+    color: var(--userColor);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    font-weight: bolder;
+}
+#flex {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 20px;
+}
+
+#box {
+    display: flex;
+    justify-content: center;
+}
+
+#sudoku {
+    display: grid;
+    outline: none;
+    grid-template-columns: repeat(3, auto);
+    transition: 0.25s linear;
+}
+.frozenSudoku{
+    -webkit-touch-callout: none;
+    -ms-touch-callout: none;
+    user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -ms-touch-action: none;
+    pointer-events: none;
+    touch-action: none;
+    opacity: 0.5;
+    transition: 0.5s ease-in;
+}
+.sudoku-elem {
+    border: 2.5px solid var(--mainColor);
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+}
+
+.sudoku-elem:nth-child(3n+1) {
+    border-right: none;
+}
+
+.sudoku-elem:nth-child(3n+3) {
+    border-left: none;
+}
+
+.sudoku-elem:nth-child(-n+3) {
+    border-bottom: none;
+}
+
+.sudoku-elem:nth-child(n+7) {
+    border-top: none;
+}
+
+.cella {
+    min-width: var(--size);
+    min-height: var(--size);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    outline: none;
+    border: 0.5px solid var(--secondBackground);
+}
+
+.cella::after {
+    content: attr(num);
+    font-size: var(--numSize);
+    font-weight: bold;
+    color: var(--color);
+}
+
+.wrong {
+    background-color: red;
+}
+
+.selected {
+    background-color: var(--selectedRowColunm);
+}
+
+.selectedNum {
+    background-color: var(--selectedNums);
+}
+#nums {
+    order: 3;
+    width: var(--keyPadWidth);
+    height: var(--keyPadWidth);
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+    gap: 10px;
+}
+#homebtn{
+    order: 1;
+}
+
+#menu{
+    display: flex;
+    flex-direction: column;
+}
+#lifepoint {
+    order:2;
+    text-align: center;
+    color: var(--mainColor);
+    margin-bottom: 10px;
+}
+#countErrorh1{
+    font-size: calc(var(--numSize));
+}
+.menu-num {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: var(--numSize);
+    cursor: pointer;
+    background-color: var(--secondBackground);
+    border-radius: 12px;
+    color: var(--mainColor);
+    transition: 0.25s linear;
+}
+
+.menu-num:hover {
+    opacity: 0.5;
+}
+#timer{
+    order: 4;
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+}
+.timer-elements{
+    font-size: calc(var(--keyPadWidth) / 4);
+    color: var(--mainColor);
+}
+
+#endFinish{
+    order: 5;
+}
+#finish-message{
+    font-size: var(--numSize);
+}
+.finish{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+.finish-btn{
+    width:var(--keyPadWidth);
+    border-radius: 8px;
+    background-color: var(--mainColor);
+    height: 40px;
+    cursor: pointer;
+    color: var(--background);
+    font-weight: bolder;
+}
+
+@media only screen and (max-width: 700px) {
+    :root{
+        --size:42px;
+        --numSize:21px;
+        --keyPadWidth: 150px;
+    }
+}
+@media only screen and (max-width: 600px) {
+    :root {
+        --size: 35px;
+        --numSize: 20px;
+        --keyPadWidth:120px;
+    }
+}
+@media only screen and (max-width: 500px) {
+    #flex {
+        flex-direction: column;
+        align-items: center;
+    }
+    #timer{
+        order: 1;
+        margin-top: -15px;
+    }
+    #homebtn{
+        order: 4;
+        margin-top: 10px;
+    }
+}
+@media only screen and (max-width:400px) {
+    :root {
+        --size: 30px;
+        --numSize: 20px;
+    }
+}
+
+@media only screen and (max-width:300px) {
+    :root {
+        --size: 25px;
+        --numSize: 15px;
+    }
+}

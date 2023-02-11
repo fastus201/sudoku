@@ -1,0 +1,16 @@
+
+:root {
+    --secondBackground: hsl(213, 19%, 18%);
+    --background: hsl(216, 12%, 8%);
+    --h1Color: hsl(217, 12%, 63%);
+    --size: 50px;
+    --numSize: 30px;
+    --mainColor:  #1affb2;
+    --error: red;
+    --userColor:#63b4cf;
+    --textColor:white;
+    --keyPadWidth:200px;
+    --fontSize:20px;
+    --selectedRowColunm:#272625;
+    --selectedNums:#42423d;
+}

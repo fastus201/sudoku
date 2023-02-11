@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.socket.io/4.5.0/socket.io.min.js"
+        integrity="sha384-7EyYLQZgWBi67fBtVxw60/OWl1kjsfrPFcaU0pp0nAh+i8FD068QogUvg85Ewy1k"
+        crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="public/script/notify.js"></script>
+    <script src="public/script/cookies.js"></script>
+    <title>Quiz</title>
+    <script src="public/script/login.js"></script>
+    <link rel="stylesheet" href="public/css/login.css">
+    <style>
+    </style>
+</head>
+
+<body onload="checkCookie()">
+    <div id="page">
+        <div id="form-register" class="form" style="display:flex">
+            <form action="javascript:void(0)" style="position:relative">
+                <h2 style="text-align:center;color:red;display: none;" id="errorMessage">Nickname già in uso</h2>
+                <label for="nickname" id="labelNick">Nickname</label><br><br>
+                <input type="text" maxlength="20" autocomplete="nickname" id="regNick" class="form-input"
+                    placeholder="Inserisci il nickname (3 caratteri)" onkeydown="filterLetter(event)"><br><br>
+                <label for="password">Password</label><br><br>
+                <input type="password" class="form-input" id="passwNick" autocomplete="new-password">
+                <br><br>
+                <label for="confirmPassword">Conferma la password</label><br><br>
+                <input type="password" class="form-input" id="confPassword" autocomplete="new-password">
+                <p style="color:var(--h1Color  )">La password deve contenere almeno <br>8 caratteri e un numero</p>
+                <div class="form-container-button">
+                    <button class="form-button primary" type="submit" onclick="registerAccount()"
+                        id="registerBtn">Registrati</button>
+                    <button class="form-button secondary" type="button" onclick="accesButton()">Accedi</button>
+                </div>
+            </form>
+        </div>
+        <div id="form-login" class="form">
+            <form action="javascript:void(0)" method="get">
+                <label for="nickname">Nickname</label><br><br>
+                <input type="text" id="nickname" autocomplete="new-password" class="form-input"><br><br>
+                <label for="password">Password</label><br><br>
+                <input type="password" class="form-input" id="password" autocomplete="new-password"><br><br>
+                <div class="form-container-button" style="margin-top:10px;">
+                    <button class="form-button primary" type="submit" onclick="accessAccount()">Accedi</button>
+                    <button class="form-button secondary" type="button" onclick="registerButton()">Registrati</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,71 @@
+@import "var.css";
+
+* {
+    font-family: monospace;
+}
+body{
+    margin: 0;
+    padding: 0;
+    background-color: var(--background);
+}
+#container{
+    display: flex;    
+    justify-content: center;
+}
+#title{
+    margin: 0;
+    color: var(--mainColor);
+    text-align:center;
+    font-size: 60px;
+    flex:30%;
+}
+#game{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+#game-user {
+    background-color: var(--secondBackground);
+    height: 30px;
+    min-width: 100px;
+    max-width: 300px;
+    border-radius: 8px;
+    color: var(--userColor);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    font-weight: bolder;
+    cursor: pointer;
+}   
+#game-btn{
+    margin-top: 20px;
+    cursor: pointer;
+    width: 200px;
+    height: 50px;
+    border-radius: 8px;
+    font-size: 25px;
+    background-color: var(--secondBackground);
+    color: var(--mainColor);
+    transition: 0.25s linear;
+    border-color: transparent;
+}
+#game-btn:hover{
+    opacity: 0.6;
+}
+#diff{
+    display: flex;
+    border: 2px solid var(--mainColor);
+}
+.diff-btn{
+    border:none;
+    background-color: var(--secondBackground);
+    font-size: 15px;
+    padding: 10px;
+    cursor: pointer;
+    color: var(--h1Color);
+}
+.diff-btn:not(.diff-btn:nth-child(3)){
+    border-right: 2px solid var(--mainColor);
+}

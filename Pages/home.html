@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.socket.io/4.5.0/socket.io.min.js"
+            integrity="sha384-7EyYLQZgWBi67fBtVxw60/OWl1kjsfrPFcaU0pp0nAh+i8FD068QogUvg85Ewy1k"
+            crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="public/css/home.css">
+    <script src="public/script/cookies.js"></script>
+    <script src="public/script/home.js"></script>
+</head>
+<body onload="checkCookie2(),selectDifficulty(0)">
+    <div id="container">
+        <h1 id="title">SUDOKU</h1>
+    </div>
+    <div id="game">
+        <div id="game-user"onclick="openAccount()"></div>
+        <button id="game-btn" onclick="playGame()">Gioca!</button>
+        <h2 style="color: var(--mainColor);">Difficoltà:</h2>
+        <div id="diff">
+            <div class="diff-btn" onclick="selectDifficulty(0)" id="diff-btn-0">Facile </div>
+            <div class="diff-btn" onclick="selectDifficulty(1)" id="diff-btn-1">Medio </div>
+            <div class="diff-btn" onclick="selectDifficulty(2)" id="diff-btn-2">Difficile</div>
+        </div>
+    </div>
+</body>
+</html>

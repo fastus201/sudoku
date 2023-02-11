@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.socket.io/4.5.0/socket.io.min.js"
+        integrity="sha384-7EyYLQZgWBi67fBtVxw60/OWl1kjsfrPFcaU0pp0nAh+i8FD068QogUvg85Ewy1k"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="public/css/account.css">
+    <script src="public/script/cookies.js"></script>
+    <script src="public/script/account.js"></script>
+</head>
+<body onload="checkCookie2(),getDataFromServer()">
+    <div id="container">
+        <h1 id="title">SUDOKU</h1>
+    </div>
+    <div id="game">
+        <div id="game-user" onclick="backHome()"></div>
+    </div>
+    <div id="container">
+        <div id="account" class="text" style="font-size: 25px;font-weight: bolder;">
+            Account:
+        </div>
+        <div id="account-info">
+            <div class="text info"style="margin-top: 10px;">Nome: 
+                <span class="span-result" id="nick" ></span>
+            </div>
+            <div class="text info" style="margin-top: 10px;">Data creazione:
+                <span class="span-result" id="data"></span>
+            </div>
+        </div>
+        <div id="stats" class="text" style="font-size: 25px;font-weight: bolder;margin-top: 20px;">
+            Statistiche:
+        </div>
+        <div id="stats-info">
+            <div class="text info" style="margin-top: 10px;">Partite giocate:
+                <span class="span-result" id="games"></span>
+            </div>
+            <div class="text info" style="margin-top: 10px;">Vittorie:
+                <span class="span-result" id="wins"></span>
+            </div>
+            <div class="text info" style="margin-top: 10px;">Tempo medio:
+                <span class="span-result" id="avgTime"></span>
+            </div>
+            <div class="text info" style="margin-top: 10px;">Sconfitte:
+                <span class="span-result" id="losses"></span>
+            </div>
+            <div class="text info" style="margin-top: 10px;">Tempo medio:
+                <span class="span-result" id="avgLoseTime"></span>
+            </div>
+            <div class="text info" style="margin-top: 10px;">Percentuale di vittoria:
+                <span class="span-result" id="victoryPerc"></span>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

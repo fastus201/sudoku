@@ -1,0 +1,102 @@
+@import "var.css";
+* {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+body {
+    margin: 0;
+    padding: 0;
+    background-color: var(--background);
+}
+
+/* LOGIN FORM */
+
+.form {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 30px;
+    padding: 30px;
+    display: flex;
+    justify-content: center;
+    background-color: var(--secondBackground);
+    width: 330px;
+    height: 360px;
+    padding-bottom: 0px;
+}
+
+#form-login {
+    display: none;
+    height: 250px;
+}
+
+.form-input {
+    width: 250px;
+    height: 30px;
+    border: none;
+    outline: none;
+    border-radius: 8px;
+}
+
+@keyframes error {
+    50% {
+        border: 1px solid red;
+        transform: translateX(5px);
+    }
+
+    75% {
+        transform: translateX(-5px);
+    }
+
+    100% {
+        transform: translateX(0px);
+    }
+}
+
+.form-button {
+    color: white;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100px;
+    height: 30px;
+    background-color: var(--mainColor);
+    cursor: pointer;
+    border-radius: 8px;
+}
+.form-button:hover{
+    background-color: white;
+    color: var(--mainColor);
+}
+.form-container-button {
+    margin: 0 auto;
+    width: 175px;
+    display: flex;
+    gap: 10px;
+}
+
+
+.secondary {
+    padding-left: 5px;
+    width: 65px;
+    transition: 0.4s linear;
+}
+
+input::placeholder {
+    color: var(--secondBackground);
+    opacity: 0.8;
+}
+
+#registerBtn {
+    transition: 0.5s linear;
+}
+
+.secondary:hover {
+    width: 100px;
+}
+
+label {
+    color: var(--h1Color);
+    margin-top: 4px;
+}

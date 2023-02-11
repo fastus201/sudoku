@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdn.socket.io/4.5.0/socket.io.min.js"
+        integrity="sha384-7EyYLQZgWBi67fBtVxw60/OWl1kjsfrPFcaU0pp0nAh+i8FD068QogUvg85Ewy1k"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="public/css/play.css" />
+    <script src="public/script/cookies.js"></script>
+    <script src="public/script/play.js" defer></script>
+</head>
+<body onload="checkCookie2(),checkCookie3(),generateSudoku(),addEvent()" id="body">
+    <div id="title">
+        <h1>SUDOKU</h1>
+    </div>
+    <div style="display: flex;justify-content: center;">
+        <div id="game-user" >
+        </div>
+    </div><br>
+    <div id="flex">
+        <div id="box">
+            <div id="sudoku">
+                <div id="sudoku0" class="sudoku-elem"></div>
+                <div id="sudoku1" class="sudoku-elem"></div>
+                <div id="sudoku2" class="sudoku-elem"></div>
+                <div id="sudoku3" class="sudoku-elem"></div>
+                <div id="sudoku4" class="sudoku-elem"></div>
+                <div id="sudoku5" class="sudoku-elem"></div>
+                <div id="sudoku6" class="sudoku-elem"></div>
+                <div id="sudoku7" class="sudoku-elem"></div>
+                <div id="sudoku8" class="sudoku-elem"></div>
+            </div>
+        </div>
+        <div id="menu">
+            <div class="finish" id="homebtn">
+                <button class="finish-btn" onclick="backHome()">HOME</button>
+            </div>
+            <div id="lifepoint">
+                <h1 id="countErrorh1">Errori 0/3</h1>
+            </div>
+            <div id="nums">
+                <div class="menu-num">1</div>
+                <div class="menu-num">2</div>
+                <div class="menu-num">3</div>
+                <div class="menu-num">4</div>
+                <div class="menu-num">5</div>
+                <div class="menu-num">6</div>
+                <div class="menu-num">7</div>
+                <div class="menu-num">8</div>
+                <div class="menu-num">9</div>
+            </div>
+            <div id="timer">
+                <span class="timer-elements" id="timer1">00</span>
+                <span class="timer-elements" id="timer:" style="margin-left:-5px;margin-right:-5px;">:</span>
+                <span class="timer-elements" id="timer2">00</span>
+            </div>
+            <div class="finish" style="margin-bottom:0px;margin-top: 10px;display:none" id="endFinish">
+                <h1 style="color:var(--error);gap:20px" id="finish-message">Hai perso!</h1>
+                <button class="finish-btn" onclick="playAgain()">GIOCA ANCORA</button>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
