@@ -94,8 +94,8 @@ async function checkNumberValidity(num,id) {
     }
     return new Promise(function(resolve,reject) {
         var check = false
-        newCampo[parseInt(id/9)][id%9] = parseInt(num) 
         socket.emit("checkCella",num,id,JSON.stringify(newCampo),playerId,(result,errori)=>{
+            newCampo[parseInt(id/9)][id%9] = parseInt(num) 
             if(result == "giusto" || result == "win"){
                 check = true
                 elem.setAttribute( "num", num )
