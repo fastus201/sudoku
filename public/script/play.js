@@ -1,6 +1,5 @@
 var newCampo = []
 var focusedElem
-var combination = []
 var errori = 0
 var currentId = -1
 var time = 0
@@ -10,6 +9,8 @@ var timer
 2 = difficile -> 27 num
 3 = esperto -> 22 num
 */
+
+
 document.getElementById("body").addEventListener("click",()=>{
     if(currentId!= -1)
         document.getElementById(currentId).focus()
@@ -75,6 +76,7 @@ function selectCella(elem) {
 }
 async function checkNumberValidity(num,id) {
     let elem = document.getElementById(id)
+    let playerId = sessionStorage.getItem("id")
     for (let i = 0; i < 81; i++){ //ti colora gli altri numeri
         document.getElementById(i).classList.remove("selectedNum")
         if (document.getElementById(i).getAttribute("num") == num || i == id)//colora gli altri numeri o quello dove sei te
@@ -93,13 +95,13 @@ async function checkNumberValidity(num,id) {
     return new Promise(function(resolve,reject) {
         var check = false
         newCampo[parseInt(id/9)][id%9] = parseInt(num) 
-        socket.emit("checkCella",num,id,JSON.stringify(newCampo),(result,errori)=>{
+        socket.emit("checkCella",num,id,JSON.stringify(newCampo),playerId,(result,errori)=>{
             if(result == "giusto" || result == "win"){
                 check = true
                 elem.setAttribute( "num", num )
                 document.getElementById(id).style.setProperty("--color","var(--mainColor)")
                 if (result == "win") {
-                    socket.emit("gameOver","win")
+                    socket.emit("gameOver","win",playerId)
                     document.getElementById("finish-message").style.color = "green";
                     document.getElementById("finish-message").innerHTML = "Hai vinto!"
                     document.getElementById("endFinish").style.display = "flex"
@@ -113,7 +115,7 @@ async function checkNumberValidity(num,id) {
                 document.getElementById("countErrorh1").innerHTML = "Errori "+errori+"/3"
                 if (result == "gameOver") {
                     console.log("HAI PERSO!");
-                    socket.emit("gameOver","lose")
+                    socket.emit("gameOver","lose",playerId)
                     document.getElementById("endFinish").style.display = "flex"
                     document.getElementById("countErrorh1").style.color = "red"
                     freezeGame()
@@ -124,7 +126,7 @@ async function checkNumberValidity(num,id) {
     })
 }
 function checkForAllNumbers() {
-    combination = [0,0,0,0,0,0,0,0,0]
+    var combination = [0,0,0,0,0,0,0,0,0]
     var buttons = document.getElementsByClassName("menu-num")
     for(i = 0; i < 9; i++){
         for (let k = 0; k < 9; k++){
@@ -236,12 +238,13 @@ function backHome() {
 function playAgain() {
     let difficulty = parseInt(sessionStorage.getItem("diff"))
     let token = getCookie("token")
-    socket.emit("checkForPossibleGame",token,(game)=>{
+    let id = sessionStorage.getItem("id")
+    socket.emit("checkForPossibleGame",token,id,(game)=>{
         if(game){
             return
         }
     })
-    socket.emit("playGame",difficulty,token,(campo)=>{
+    socket.emit("playGame",difficulty,token,id,(campo)=>{
         window.open("/play","_self")
         campo = JSON.stringify(campo)
         sessionStorage.setItem("campo",campo)

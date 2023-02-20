@@ -5,12 +5,7 @@ const server = http.createServer(app)
 const {Server} =require("socket.io")
 const io = new Server(server) 
 const  fs = require("fs")
-
 var totGames = []
-server.listen(process.env.PORT || 5000,()=>{
-    console.log("listening on *:5000");
-})
-
 app.use("/public", express.static('./public/'));
 
 app.get('/', (req, res) => {
@@ -32,7 +27,6 @@ io.on("connection",(socket)=>{
     socket.on("disconnect",()=>{
         for (let i = 0; i < totGames.length; i++) {
             if (totGames[i].playerId == socket.id && totGames[i].inGame) {
-                totGames.splice(i,1)
                 break
             }
         }
@@ -100,10 +94,10 @@ io.on("connection",(socket)=>{
     socket.on("logGame",(callback)=>{
         callback(totGames)
     })
-    socket.on("checkForPossibleGame",(token,callback)=>{
+    socket.on("checkForPossibleGame",(token,id,callback)=>{
         for (let i = 0; i < totGames.length; i++) {
             if (totGames[i].tokenId == token && !totGames[i].inGame){
-                totGames[i].playerId = socket.id
+                totGames[i].playerId = id
                 totGames[i].inGame = true
                 callback(true)
             }
@@ -111,13 +105,13 @@ io.on("connection",(socket)=>{
         callback(false)
 
     })
-    socket.on("checkCella",(num,id,oldCampo,callback)=>{
+    socket.on("checkCella",(num,id,oldCampo,playerId,callback)=>{
         var newCampo = JSON.parse(oldCampo)
-        var campo = getCampoFromId(socket.id)
-        let index
+        let index = -1
         for(let i=0;i<totGames.length;i++)  //ricavo l'index delle partita
-            if(totGames[i].playerId == socket.id)
+            if(totGames[i].playerId == playerId)
                 index = i
+        var campo = totGames[index].campo
         if (num == campo[parseInt(id/9)][id%9] ){   //controllo se ho inserito la cella correttamente
             let win = true
             for (let i = 0; i < 9; i++) {
@@ -139,9 +133,9 @@ io.on("connection",(socket)=>{
             callback("sbagliato",totGames[index].errors)
         }
     })
-    socket.on("gameOver",(res)=>{
+    socket.on("gameOver",(res,id)=>{
         let dates = new Date()
-        let index = getIndexFromId(socket.id)
+        let index = getIndexFromId(id)
         let gamesInfo = totGames[index]
         let currentTime = dates.getTime() - gamesInfo.time
         let unix_timestamp = currentTime
@@ -205,13 +199,8 @@ io.on("connection",(socket)=>{
                 })
             }
         })
+        removeSimilarGames(id) //tolgo dalla lista dei game
     })
-    function getCampoFromId(id) {
-        for (let i = 0; i < totGames.length; i++) {
-            if(totGames[i].playerId == id)
-                return totGames[i].campo
-        }
-    }
     function checkPassword(json,nick,password) {
         for (let i= 0; i < json.length; i++) {
             if (json[i].nick == nick && json[i].password == password) {
@@ -233,14 +222,15 @@ io.on("connection",(socket)=>{
             if (totGames[i].playerId == id) 
                 return i
     }
-    socket.on("playGame",(difficulty,token,callback)=>{
+    socket.on("playGame",(difficulty,token,id,callback)=>{
         var campo = generateSudoku()
         let newCampo = genNewCampo(campo,difficulty)
         let date = new Date()
         let arrDiff = ["Facile","Medio","Difficile"]
+        removeSimilarGames(id)
         totGames.push({
             gameId: Math.random().toString(18).substr(2) + Math.random().toString(18).substr(2),
-            playerId:socket.id,
+            playerId:id,
             tokenId:token,
             inGame:false,
             difficulty:arrDiff[difficulty],
@@ -251,7 +241,13 @@ io.on("connection",(socket)=>{
         )
         callback(newCampo)
     })
-
+function removeSimilarGames(id) {//id è l'id da togliere
+    for(i=0;i<totGames.length;i++)
+        if(totGames[i].playerId == id){
+            totGames.splice(i,1)
+            return
+        }
+}
     socket.on("getDataFromServer",(token,callback)=>{
       let backData = {nick:"",date:"",games:"",lose:"",win:"",avgTime:"",avgLoseTime:""}  
       fs.readFile("./Files/data.json",{encoding:"utf-8"},function(err,data) {   
@@ -429,7 +425,6 @@ function generateSudoku() {
                 if( k==2 && done ){
                     let rowArray = campo[6].slice(i*3,i*3+3).concat(campo[7].slice(i*3,i*3+3))
                     let checkArray = check2Arrays( rowArray, campo[8].slice(i*3,i*3+3) )
-                    //console.log( rowArray, checkArray )
                     if( checkArray.length < 6 ){
                         done = false
                         break
@@ -540,3 +535,6 @@ function check0inArray(n,newCampo) {
     }
     return true
 }
+server.listen(process.env.PORT || 5000,()=>{
+    console.log("listening on *:5000");
+})

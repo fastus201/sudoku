@@ -47,7 +47,7 @@ function registerAccount() {
             $("#regNick").notify("Nickname già in uso!",{autoHideDelay: 2000},"error");
         }
         else{
-            window.open("http://localhost:9999","_self")
+            window.open("/","_self")
         }
     })
 }
@@ -74,7 +74,7 @@ function accessAccount() {
         }
         else{
             setCookie("token",token,30)
-            window.open("http://localhost:9999","_self")
+            window.open("/","_self")
         }
     }) 
 }

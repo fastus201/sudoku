@@ -10,17 +10,14 @@ function selectDifficulty(diff) {
 }
 
 function playGame() {
+    let id = Math.random().toString(36).substr(2) + Math.random().toString(36).substr(2)
     let token = getCookie("token")
-    socket.emit("checkForPossibleGame",token,(game)=>{
-        if(game){
-            return
-        }
-    })
-    socket.emit("playGame",difficulty,token,(campo)=>{
+    socket.emit("playGame",difficulty,token,id,(campo)=>{
         window.open("/play","_self")
         campo = JSON.stringify(campo)
         sessionStorage.setItem("campo",campo)
         sessionStorage.setItem("diff",difficulty)
+        sessionStorage.setItem("id",id)
     })
 }
 

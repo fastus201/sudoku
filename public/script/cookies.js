@@ -1,4 +1,3 @@
-var socket = io.connect("https://sudoku.onrender.com")
 function setCookie(cname,cvalue,exdays) {
   const d = new Date();
   d.setTime(d.getTime() + (exdays*24*60*60*1000));
@@ -29,7 +28,7 @@ function checkCookie() {
         return
     }
     else{
-        window.open("/",_self)
+        window.open("/","_self")
     }
   })
 }
@@ -37,14 +36,15 @@ function checkCookie2() {
     let token = getCookie("token")
       socket.emit("checkToken",token,function(err,nick){
         if(err)
-          window.open("/","_self")
+          window.open("/login","_self")
         else
           document.getElementById("game-user").innerHTML = nick
       })
 }
 function checkCookie3() {
     let token = getCookie("token")
-    socket.emit("checkForPossibleGame",token,(game)=>{
+    let id = sessionStorage.getItem("id")
+    socket.emit("checkForPossibleGame",token,id,(game)=>{
         if (!game)
           window.open("/","_self")          
     })
