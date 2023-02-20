@@ -483,7 +483,7 @@ function genNewCampo(campo,difficulty) {
     let numbers = 0
     switch (difficulty) {
         case 0:
-            numbers = 80
+            numbers = 36
             break;
         case 1:
             numbers = 31
