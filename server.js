@@ -245,7 +245,6 @@ function removeSimilarGames(id) {//id è l'id da togliere
     for(i=0;i<totGames.length;i++)
         if(totGames[i].playerId == id){
             totGames.splice(i,1)
-            return
         }
 }
     socket.on("getDataFromServer",(token,callback)=>{
