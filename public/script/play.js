@@ -134,6 +134,7 @@ function checkForAllNumbers() {
                 combination[newCampo[i][k]-1]++
         }
     }
+    console.log(combination);
     for (let i = 0; i < 9; i++) {
         if (combination[i] == 9)
             buttons.item(i).classList.add("frozenSudoku")
