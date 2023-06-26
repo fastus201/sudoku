@@ -518,7 +518,7 @@ function genNewCampo(campo,difficulty) {
     return newCampo
 }
 function check0inArray(n,newCampo) {
-    let check
+    let check;
     let count
     for (let i = 0; i < 9; i++) {
         check = false
