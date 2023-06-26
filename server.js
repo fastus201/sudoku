@@ -534,6 +534,6 @@ function check0inArray(n,newCampo) {
     }
     return true
 }
-server.listen(process.env.PORT || 5000,()=>{
+server.listen(process.env.PORT,()=>{
     console.log("listening on *:5000");
 })
